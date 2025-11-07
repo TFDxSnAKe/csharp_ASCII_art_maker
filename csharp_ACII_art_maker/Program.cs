@@ -7,6 +7,7 @@ namespace ascii
     class Program
     {
         static char[] gradient_1 = ['@', '%', '#', '*', '=', '-', '.', '.', ' ', ' ', ' '];
+        static char[] gradient_2 = [' ', ' ', ' ', '.', '.', '-', '=', '*', '#', '%', '@'];
 
         static void Main(string[] args)
         {
@@ -22,7 +23,7 @@ namespace ascii
         {
             Image image = Image.FromFile(path);
 
-            Bitmap bitMap = ScaleImage(image, 2000, 100);
+            Bitmap bitMap = ScaleImage(image, 1200, 100);
 
             try
             {
@@ -59,7 +60,7 @@ namespace ascii
                 }
                 Console.Write("  ||\n");
             }
-            MakeFrame(x);
+            MakeFrame(chars.GetLength(0) + 4);
             // for debugging purposes
             Console.WriteLine($"\nAmount of i loops: {x}");
             Console.WriteLine($"Amount of j loops: {y}");
@@ -68,8 +69,8 @@ namespace ascii
         // make a beautiful frame around the generated ASCII art
         static void MakeFrame(int x)
         {
-            Console.Write("||  ");
-            RepeatedWriteChar(x - 2, ' ');
+            Console.Write("||");
+            RepeatedWriteChar(x, ' ');
             Console.Write("||\n");
             Console.Write("  ");
             RepeatedWriteChar(x, '=');
@@ -77,7 +78,7 @@ namespace ascii
 
         static void RepeatedWriteChar(int n, char c)
         {
-            while (n > -5) // OoOOooOoo magic number
+            while (n > 0)
             {
                 Console.Write(c);
                 n--;
@@ -90,7 +91,7 @@ namespace ascii
             // use more filled characters for small f values to get black
             // the opposite for larger f values
             float index = 10f * (float)Math.Round(f, 2);
-            return gradient_1[(int)index]; 
+            return gradient_2[(int)index]; 
         }
 
         /// <summary>
