@@ -11,6 +11,7 @@ namespace ascii
 
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Green; // ooeoeoeoeo green I am hackerman now
             while (true)
             {
                 Console.WriteLine("Please input the full file path for your image");
