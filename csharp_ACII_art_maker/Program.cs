@@ -11,22 +11,35 @@ namespace ascii
 
         static void Main(string[] args)
         {
-            Console.WriteLine("This is supposed to be an apple: \n");
-            MakeASCII("..\\..\\..\\test_apple.jpg");
-            Console.WriteLine("\nThis is supposed to be Boccher: \n");
-            MakeASCII("..\\..\\..\\texture_test_1.jpg");
-            Console.WriteLine("\nThis is supposed to be Joker Persona 5: \n");
-            MakeASCII("..\\..\\..\\test_joker.jpg");
+            while (true)
+            {
+                Console.WriteLine("Please input the full file path for your image");
+                Console.WriteLine("Press [Q] quit");
+                string input = Console.ReadLine();
+                if (input == "Q" || input == "q")
+                {
+                    break;
+                }
+                input = new string((from c in input
+                                    where !(c == '"')
+                                    select c
+                                   ).ToArray());
+                MakeASCII(input);
+            }
         }
 
         static void MakeASCII(string path)
         {
-            Image image = Image.FromFile(path);
-
-            Bitmap bitMap = ScaleImage(image, 1200, 100);
-
-            try
+            if (!File.Exists(path))
             {
+                Console.WriteLine("Err: Filepath is invalid");
+            }
+            else
+            {
+                Image image = Image.FromFile(path);
+
+                Bitmap bitMap = ScaleImage(image, 130, 130);
+
                 char[,] pixels = new char[bitMap.Width, bitMap.Height];
                 for (int i = 0; i < bitMap.Width; i++)
                 {
@@ -39,10 +52,6 @@ namespace ascii
                 }
                 // let the printing begin
                 PrintASCII(pixels);
-            }
-            catch (Exception e)
-            {
-                throw;
             }
         }
 

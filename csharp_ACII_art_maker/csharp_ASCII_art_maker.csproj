@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="test_joker.jpg" />
+    <None Remove="texture_test_1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="9.0.10" />
   </ItemGroup>
 
